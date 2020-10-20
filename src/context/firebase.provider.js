@@ -1,15 +1,15 @@
 import React from "react";
 
+import { firebase } from '../lib/firebase.prod';
 import { FirebaseContext } from './firebase.context';
-import {firebase} from '../lib/firebase.prod';
 
 
-const FirebaseProvider = (props) => {
-    return (
-        <FirebaseContext.provider value={{firebase}}>
-            {props.children}
-        </FirebaseContext.provider>
-    )
-}
+const FirebaseProvider = (props) =>
+
+    <FirebaseContext.Provider value={{ firebase }}>
+        {props.children}
+    </FirebaseContext.Provider>
+
+
 
 export default FirebaseProvider;
