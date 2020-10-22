@@ -8,24 +8,25 @@ import SignUp from './pages/signup';
 import Browse from './pages/browse';
 
 import { IsUserRedirect, ProtectedRoute } from './hoc/routes';
-
+import { useAuthListener } from './hooks';
 
 function App() {
-  const user = null;
+  const { User } = useAuthListener();
+  console.log(User);
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGN_IN}>
+          <IsUserRedirect user={User} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGN_IN}>
             <SignIn />
           </IsUserRedirect>
-          <IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGN_UP}>
+          <IsUserRedirect user={User} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGN_UP}>
             <SignUp />
           </IsUserRedirect>
-          <ProtectedRoute user={user} path={ROUTES.BROWSE}>
+          <ProtectedRoute user={User} path={ROUTES.BROWSE}>
             <Browse />
           </ProtectedRoute>
-          <IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.HOME}>
+          <IsUserRedirect user={User} loggedInPath={ROUTES.BROWSE} path={ROUTES.HOME}>
             <Home />
           </IsUserRedirect>
         </Switch>
