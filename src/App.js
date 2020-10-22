@@ -12,7 +12,7 @@ import { useAuthListener } from './hooks';
 
 function App() {
   const { User } = useAuthListener();
-  console.log(User);
+  
   return (
     <div className="App">
       <BrowserRouter>
