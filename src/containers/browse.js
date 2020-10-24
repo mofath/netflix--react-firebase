@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { SelectProfileContainer } from './profiles';
 import * as ROUTES from '../constants/routes';
 import { FirebaseContext } from '../context/firebase.context';
-import { Loading, Header } from '../components';
+import { Loading, Header, Card } from '../components';
 import logo from '../logo.svg';
 
 
@@ -10,6 +10,8 @@ export function BrowseContainer({ slides }) {
     const [Profile, setProfile] = useState({});
     const [IsLoading, setIsLoading] = useState(true);
     const [SearchTerm, setSearchTerm] = useState("");
+    const [Category, setCategory] = useState('series');
+    const [SlideRows, setSlideRows] = useState([]);
 
     const { firebase } = useContext(FirebaseContext);
     const user = firebase.auth().currentUser || {};
@@ -19,6 +21,10 @@ export function BrowseContainer({ slides }) {
         console.log(user);
     }, [Profile.displayName, user]);
 
+    useEffect(() => {
+        setSlideRows(slides[Category])
+    }, [slides, Category])
+
     return Profile.displayName ?
         (
             <>
@@ -27,8 +33,18 @@ export function BrowseContainer({ slides }) {
                     <Header.Frame>
                         <Header.Group>
                             <Header.Logo to={ROUTES.HOME} src={logo} alt="Netflix" />
-                            <Header.TextLink>Series</Header.TextLink>
-                            <Header.TextLink>Films</Header.TextLink>
+                            <Header.TextLink
+                                active={Category === 'series' ? true : false}
+                                onClick={() => setCategory('series')}
+                            >
+                                Series
+                                </Header.TextLink>
+                            <Header.TextLink
+                                active={Category === 'films' ? true : false}
+                                onClick={() => setCategory('films')}
+                            >
+                                Films
+                                </Header.TextLink>
                         </Header.Group>
                         <Header.Group>
                             <Header.Search searchTerm={SearchTerm} setSearchTerm={setSearchTerm}>
@@ -42,7 +58,7 @@ export function BrowseContainer({ slides }) {
                                         <Header.TextLink>{user.displayName}</Header.TextLink>
                                     </Header.Group>
                                     <Header.Group>
-                                        <Header.TextLink onClick={()=> firebase.auth().signOut()}>
+                                        <Header.TextLink onClick={() => firebase.auth().signOut()}>
                                             Sign Out
                                         </Header.TextLink>
                                     </Header.Group>
@@ -61,6 +77,31 @@ export function BrowseContainer({ slides }) {
                         <Header.PlayButton>Play</Header.PlayButton>
                     </Header.Feature>
                 </Header>
+
+                <Card.Group>
+                    {SlideRows.map((slideItem, index) => (
+                        <Card key={index}>
+                            <Card.Title>{slideItem.title}</Card.Title>
+                            <Card.Enteties>
+                                {slideItem.data.map((item, index) => (
+                                    <Card.Item key={item.docId} item={item}>
+                                        <Card.Image src={`/images/${Category}/${item.genre}/${item.slug}/small.jpg`} />
+                                        <Card.Meta>
+                                            <Card.SubTitle>{item.title}</Card.SubTitle>
+                                            <Card.Text>{item.description}</Card.Text>
+                                        </Card.Meta>
+                                    </Card.Item>
+                                ))}
+                            </Card.Enteties>
+                            <Card.Feature category={Category}>
+                                    {/* <Player>
+                                        <Player.Button />
+                                        <Player.Video src='/videos/bunny.mp4'/>
+                                    </Player> */}
+                            </Card.Feature>
+                        </Card>
+                    ))}
+                </Card.Group>
             </>
         ) :
         (
