@@ -4,7 +4,7 @@ import { FooterContainer } from './footer';
 
 import * as ROUTES from '../constants/routes';
 import { FirebaseContext } from '../context/firebase.context';
-import { Loading, Header, Card } from '../components';
+import { Loading, Header, Card, Player } from '../components';
 import logo from '../logo.svg';
 
 
@@ -96,10 +96,10 @@ export function BrowseContainer({ slides }) {
                                 ))}
                             </Card.Enteties>
                             <Card.Feature category={Category}>
-                                    {/* <Player>
-                                        <Player.Button />
-                                        <Player.Video src='/videos/bunny.mp4'/>
-                                    </Player> */}
+                                <Player>
+                                    <Player.Button />
+                                    <Player.Video src="/videos/bunny.mp4" />
+                                </Player>
                             </Card.Feature>
                         </Card>
                     ))}
