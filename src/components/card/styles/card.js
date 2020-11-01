@@ -61,7 +61,7 @@ export const Text = styled.p`
     line-height:normal;
 `;
 
-export const Enteties = styled.div`
+export const Entities = styled.div`
     display:flex;
     flex-direction:row;
 `;

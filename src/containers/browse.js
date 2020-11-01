@@ -84,7 +84,7 @@ export function BrowseContainer({ slides }) {
                     {SlideRows.map((slideItem, index) => (
                         <Card key={index}>
                             <Card.Title>{slideItem.title}</Card.Title>
-                            <Card.Enteties>
+                            <Card.Entities>
                                 {slideItem.data.map((item, index) => (
                                     <Card.Item key={item.docId} item={item}>
                                         <Card.Image src={`/images/${Category}/${item.genre}/${item.slug}/small.jpg`} />
@@ -94,7 +94,7 @@ export function BrowseContainer({ slides }) {
                                         </Card.Meta>
                                     </Card.Item>
                                 ))}
-                            </Card.Enteties>
+                            </Card.Entities>
                             <Card.Feature category={Category}>
                                 <Player>
                                     <Player.Button />

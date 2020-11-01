@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 
-import { Container, Group, Title, SubTitle, Text, Item, Image, Enteties, Maturity, Content, FeatureClose, FeatureText, Feature, Meta, FeatureTitle } from './styles/card'
+import { Container, Group, Title, SubTitle, Text, Item, Image, Entities, Maturity, Content, FeatureClose, FeatureText, Feature, Meta, FeatureTitle } from './styles/card'
 
 export const FeatureContext = createContext();
 
@@ -52,20 +52,12 @@ Card.Item = function CardItem({ item, children, ...restProps }) {
     );
 };
 
-Card.Enteties = function cardEnteties({ children, ...restProps }) {
-    return <Enteties {...restProps} >{children}</Enteties>
+Card.Entities = function cardEntities({ children, ...restProps }) {
+    return <Entities {...restProps} >{children}</Entities>
 }
 
 Card.Image = function cardImage({ src, ...restProps }) {
     return <Image src={src} {...restProps} />
-}
-
-Card.Maturity = function cardMaturity({ children, ...restProps }) {
-    return <Maturity {...restProps} >{children}</Maturity>
-}
-
-Card.Content = function cardContent({ children, ...restProps }) {
-    return <Content {...restProps} >{children}</Content>
 }
 
 Card.Feature = function CardFeature({ children, category, ...restProps }) {
