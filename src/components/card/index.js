@@ -7,7 +7,6 @@ export const FeatureContext = createContext();
 export default function Card({ children, ...restProps }) {
     const [ShowFeature, setShowFeature] = useState(false);
     const [ItemFeature, setItemFeature] = useState({});
-
     return (
         <FeatureContext.Provider value={{ ShowFeature, setShowFeature, ItemFeature, setItemFeature }}>
             <Container {...restProps}>{children}</Container>
@@ -38,7 +37,6 @@ Card.Meta = function cardMeta({ children, ...restProps }) {
 
 Card.Item = function CardItem({ item, children, ...restProps }) {
     const { setShowFeature, setItemFeature } = useContext(FeatureContext);
-
     return (
         <Item
             onClick={() => {
